@@ -64,16 +64,16 @@ const Contact = () => {
       alert("Please enter a valid email address.");
       return;
     }
+      try {
+        setLoading(true);
+        const response = await axios.post("https://my-portfoilio-pr55.onrender.com/api/contact", {
+          firstName,
+          lastName,
+          email,
+          subject,
+          message
+        });
 
-    try {
-      setLoading(true);
-      const response = await axios.post("http://localhost:5000/api/contact", {
-        firstName,
-        lastName,
-        email,
-        subject,
-        message
-      });
 
       alert(response.data.message || "Message sent successfully!");
 
