@@ -4,7 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const Contact = require("./models/contact"); // adjust path if needed
+const Contact = require("./models/Contact"); // adjust path if needed
 
 dotenv.config();
 
