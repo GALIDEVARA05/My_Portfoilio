@@ -5,6 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
   const contactInfo = [
@@ -50,32 +52,32 @@ const Contact = () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
 
     const { firstName, lastName, email, subject, message } = formData;
 
     if (!firstName || !lastName || !email || !subject || !message) {
-      alert("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
     if (!isValidEmail(email)) {
-      alert("Please enter a valid email address.");
+      toast.error("Please enter a valid email address.");
       return;
     }
-      try {
-        setLoading(true);
-        const response = await axios.post("https://my-portfoilio-pr55.onrender.com/api/contact", {
-          firstName,
-          lastName,
-          email,
-          subject,
-          message
-        });
 
+    try {
+      setLoading(true);
+      const response = await axios.post("https://my-portfoilio-pr55.onrender.com/api/contact", {
+        firstName,
+        lastName,
+        email,
+        subject,
+        message
+      });
 
-      alert(response.data.message || "Message sent successfully!");
+      toast.success(response.data.message || "Message sent successfully!");
 
       // reset form
       setFormData({
@@ -85,16 +87,18 @@ const Contact = () => {
         subject: "",
         message: ""
       });
+
     } catch (error) {
       if (error.response && error.response.status === 409) {
-        alert("You've already submitted this message.");
+        toast.warning("You've already submitted this message.");
       } else {
-        alert("Something went wrong. Please try again later.");
+        toast.error("Something went wrong. Please try again later.");
       }
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <section id="contact" className="py-20">
@@ -254,6 +258,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} />
     </section>
   );
 };
