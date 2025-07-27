@@ -192,11 +192,15 @@ const Contact = () => {
                     <Button 
                       type="submit" 
                       size="lg" 
-                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-soft hover:shadow-hover transition-all duration-300"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-soft hover:shadow-hover transition-all duration-300 flex items-center justify-center gap-3"
                       disabled={loading}
                     >
+                      {loading && (
+                        <span className="w-6 h-6 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin shadow-md"></span>
+                      )}
                       {loading ? "Sending..." : "Send Message"}
                     </Button>
+
                   </form>
                 </CardContent>
               </Card>
