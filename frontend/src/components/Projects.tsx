@@ -25,10 +25,10 @@ const Projects = () => {
       demo: "https://demo-chat.com"
     },
     {
-      title: "Analytics Dashboard",
-      description: "Comprehensive data visualization dashboard built with React and Node.js, featuring interactive charts, real-time metrics, and customizable reporting.",
+      title: "Real Time College Portal",
+      description: "Comprehensive Student data visualization dashboard built with React and Node.js, featuring interactive designs, real-time metrics, and customizable reporting.",
       technologies: ["React.js", "Node.js", "Chart.js", "PostgreSQL", "Express.js", "REST API"],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
+      image: "https://d3lzcn6mbbadaf.cloudfront.net/media/details/ANI-20250118065033.jpg",
       github: "https://github.com",
       demo: "https://demo-analytics.com"
     },
