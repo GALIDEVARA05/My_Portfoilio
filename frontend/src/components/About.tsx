@@ -47,25 +47,25 @@ const About = () => {
                 </p>
                 <p>
                   My approach combines technical excellence with creative problem-solving. I believe that great 
-                  software isn't just about writing code—it's about understanding user needs, architecting 
+                  software isn't just about writing code it's about understanding user needs, architecting 
                   robust solutions, and delivering value that makes a difference.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
                   <div className="flex items-center space-x-3">
                     <Award className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span>5+ Years Professional Experience</span>
+                    <span>Developed Full Stack Applications Using MERN</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Users className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span>50+ Successful Projects</span>
+                    <span>Bridging AI Models with Scalable Web Interfaces</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Rocket className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span>Performance-Driven Solutions</span>
+                    <span>Real-World Machine Learning Applications</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Code className="h-5 w-5 text-primary flex-shrink-0" />
-                    <span>Clean, Maintainable Code</span>
+                    <span>Clean, Scalable Code Architecture</span>
                   </div>
                 </div>
               </div>
@@ -74,10 +74,10 @@ const About = () => {
             {/* Stats */}
             <div className="grid grid-cols-2 gap-6 animate-fade-in">
               {[
-                { number: "50+", label: "Projects Completed" },
-                { number: "5+", label: "Years Experience" },
+                { number: "5+", label: "Projects Completed" },
+                { number: "10+", label: "Course Completion Certificates" },
                 { number: "100%", label: "Client Satisfaction" },
-                { number: "24/7", label: "Support Available" }
+                { number: "70%", label: "In Graduation" }
               ].map((stat, index) => (
                 <Card key={index} className="text-center p-6 hover:shadow-hover transition-shadow duration-300">
                   <CardContent className="p-0">
