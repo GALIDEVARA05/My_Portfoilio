@@ -35,6 +35,7 @@ const Contact = () => {
     firstName: "",
     lastName: "",
     email: "",
+    phone: "",
     subject: "",
     message: ""
   });
@@ -52,52 +53,57 @@ const Contact = () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-    const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const { firstName, lastName, email, subject, message } = formData;
+  const { firstName, lastName, email, phone, subject, message } = formData;
 
-    if (!firstName || !lastName || !email || !subject || !message) {
-      toast.error("Please fill in all fields.");
-      return;
-    }
+  if (!firstName || !lastName || !email || !subject || !message) {
+    toast.error("Please fill in all required fields.");
+    return;
+  }
 
-    if (!isValidEmail(email)) {
-      toast.error("Please enter a valid email address.");
-      return;
-    }
+  if (!isValidEmail(email)) {
+    toast.error("Please enter a valid email address.");
+    return;
+  }
 
-    try {
-      setLoading(true);
-      const response = await axios.post("https://my-portfoilio-pr55.onrender.com/api/contact", {
-        firstName,
-        lastName,
-        email,
-        subject,
-        message
-      });
+  // ✅ Phone validation (only if provided)
+  if (phone && !/^[0-9]{10}$/.test(phone)) {
+    toast.error("Phone number must be exactly 10 digits.");
+    return;
+  }
 
-      toast.success(response.data.message || "Message sent successfully!");
+  try {
+    setLoading(true);
+    const response = await axios.post(
+      "https://my-portfoilio-pr55.onrender.com/api/contact",
+      { firstName, lastName, email, phone, subject, message }
+    );
 
-      // reset form
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        subject: "",
-        message: ""
-      });
+    toast.success(response.data.message || "Message sent successfully!");
 
-    } catch (error) {
-      if (error.response && error.response.status === 409) {
-        toast.warning("You've already submitted this message.");
-      } else {
-        toast.error("Something went wrong. Please try again later.");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+    // reset form
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: ""
+    });
+
+  } catch (error) {
+  if (error.response?.data?.error) {
+    toast.error(error.response.data.error); // show backend validation errors
+  } else {
+    toast.error("Something went wrong. Please try again later.");
+  }
+}
+ finally {
+    setLoading(false);
+  }
+};
 
 
   return (
@@ -158,6 +164,20 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="Yourmail@gmail.com"
+                        className="border-primary/20 focus:border-primary focus:ring-primary/20"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-foreground mb-2">
+                        Phone (optional)
+                      </label>
+                      <Input 
+                        name="phone"
+                        type="text"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="+91 9876543210"
                         className="border-primary/20 focus:border-primary focus:ring-primary/20"
                       />
                     </div>
